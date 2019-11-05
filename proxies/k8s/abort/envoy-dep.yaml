@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-proxy
+  labels:
+    app: k8s-proxy
+spec:
+  selector:
+    matchLabels:
+      app: k8s-proxy
+  template:
+    metadata:
+      labels:
+        app: k8s-proxy
+    spec:
+      serviceAccountName: admin-user
+      volumes:
+      - name: k8s-envoy-config
+        configMap:
+          name: k8s-envoy-config
+      containers:
+      - name: k8s-proxy
+        image: envoyproxy/envoy:v1.11.2
+        imagePullPolicy: Always
+        command: ["/usr/local/bin/envoy"]
+        args: ["-c", "/etc/envoy.yaml"]
+        ports:
+        - name: http
+          containerPort: 8081
+        volumeMounts:
+        - name: k8s-envoy-config
+          mountPath: /etc/envoy.yaml
+          subPath: envoy.yaml

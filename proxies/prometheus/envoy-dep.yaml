@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prom-proxy
+  labels:
+    app: prom-proxy
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: prom-proxy
+  template:
+    metadata:
+      labels:
+        app: prom-proxy
+    spec:
+      serviceAccountName: admin-user
+      volumes:
+      - name: prom-proxy-config
+        configMap:
+          name: prom-proxy-config
+      containers:
+      - name: prom-proxy
+        image: envoyproxy/envoy:v1.11.2
+        imagePullPolicy: Always
+        command: ["/usr/local/bin/envoy"]
+        args: ["-c", "/etc/envoy.yaml"]
+        ports:
+        - name: http
+          containerPort: 8082
+        volumeMounts:
+        - name: prom-proxy-config
+          mountPath: /etc/envoy.yaml
+          subPath: envoy.yaml
