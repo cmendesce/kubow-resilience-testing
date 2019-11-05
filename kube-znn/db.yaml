@@ -63,3 +63,5 @@ spec:
             port: 3306
         ports:
         - containerPort: 3306
+      nodeSelector:
+        kops.k8s.io/instancegroup: "db"
