@@ -26,7 +26,7 @@ data:
             Port sqlPort  = { }
             Property namespace = "default";
             Property hasAlternativeImages = true;
-            Property maxReplicas = 3;
+            Property maxReplicas = 5;
             Property alternativeImages = <"cmendes/kube-znn:text","cmendes/kube-znn:low","cmendes/kube-znn:high">;
             Property name = "kube-znn";
         }
@@ -41,8 +41,8 @@ data:
             Property selectors = <[name : string = "app";value : string = "kube-znn-db";]>;
         }
         
-        Property MAX_RESPTIME = 1000;
-        Property MIN_RESPTIME = 800;
+        Property MAX_RESPTIME = 1200;
+        Property MIN_RESPTIME = 700;
 
         Attachment kubeZnnDbD.sqlPort to dbServiceConnector.selectee;
         Attachment kubeZnnDbS.sqlPort to dbServiceConnector.selector;

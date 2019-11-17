@@ -7,9 +7,13 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 80
+      port: 8080
+      targetPort: http
+      protocol: TCP
     - name: http-metrics
       port: 9180
+      targetPort: metrics
+      protocol: TCP
   selector:
     app: kube-znn
   type: LoadBalancer
@@ -78,7 +82,9 @@ spec:
           periodSeconds: 1
           failureThreshold: 5
         ports:
-        - containerPort: 80
-        - containerPort: 9180
+        - name: http
+          containerPort: 80
+        - name: metrics
+          containerPort: 9180
       nodeSelector:
         kops.k8s.io/instancegroup: "web"
