@@ -4,7 +4,6 @@ metadata:
   name: prom-proxy
   labels:
     app: prom-proxy
-  namespace: monitoring
 spec:
   selector:
     matchLabels:
@@ -42,7 +41,6 @@ metadata:
   name: prom-proxy
   labels:
     app: prom-proxy
-  namespace: monitoring
 spec:
   type: LoadBalancer
   ports:
