@@ -1,7 +1,8 @@
 apiVersion: kops/v1alpha2
 kind: InstanceGroup
 metadata:
-  creationTimestamp: null
+  labels:
+    kops.k8s.io/cluster: cmendes.k8s.local
   name: web
 spec:
   image: kope.io/k8s-1.14-debian-stretch-amd64-hvm-ebs-2019-09-26
