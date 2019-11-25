@@ -53,11 +53,12 @@ data:
     customize.utility.enabled=false
     customize.scripts.path=stitch
     customize.adaptation.cycletime=15000
+    kubow.adaptation.cycletime=15000
     #- Utilities description file, Strategy evaluation config, and minimum score threshold
     customize.utility.path=utilities.yaml
     customize.utility.trackStrategy=uSF
     customize.utility.score.minimum.threshold=0.33
     customize.utility.scenario=scenario 1
 
-    kubow.prometheus.url=http://prom-proxy.monitoring.svc:8082
+    kubow.prometheus.url=http://prom-proxy.default.svc:8082
     kubow.kubernetes.url=http://k8s-proxy.default.svc:8081
