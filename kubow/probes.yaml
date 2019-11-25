@@ -6,7 +6,7 @@ metadata:
 data:
   probes.yaml: |
     probes:
-      CustomMetricsProbe:
+      LatencyProbe:
         alias: kube-znn.latency.probe
         location: 127.0.0.1
         type: java
@@ -17,20 +17,8 @@ data:
           args.0: "default"
           args.1: "kube-znn"
           args.2: "latency"
-          args.3: "histogram_quantile(0.99, rate(envoy_cluster_external_upstream_rq_time_bucket{envoy_cluster_name=\"cluster_kube_znn_8080\"}[15s]))"
+          args.3: "histogram_quantile(0.95, rate(envoy_cluster_external_upstream_rq_time_bucket{envoy_cluster_name=\"cluster_kube_znn_8080\"}[10s]))"
       
-      CustomMetricsProbe:
-        alias: kube-znn.traffic.probe
-        location: 127.0.0.1
-        type: java
-        javaInfo:
-          class: br.unifor.kubow.probes.PrometheusProbe
-          period: 5000
-          args.length: 4
-          args.0: "default"
-          args.1: "kube-znn"
-          args.2: "traffic"
-          args.3: "sum(rate(envoy_cluster_external_upstream_rq_completed{envoy_cluster_name=\"cluster_kube_znn_8080\"}[15s]))"
 
       DeploymentPropertiesProbe:
         alias: deployments.default.kube-znn.probe

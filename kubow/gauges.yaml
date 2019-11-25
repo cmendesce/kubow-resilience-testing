@@ -43,15 +43,6 @@ data:
         configValues:
           targetProbeType: default-kube-znn-latency@*
           
-      GTraffic:
-        type: KubowGaugeT
-        model: "KubeZnnSystem:Acme"
-        commands:
-          "setServiceProperty()": "kubeZnnS.setServiceProperty($<jsonValue>,<traffic>)"
-        setupValues:
-          targetIP: "127.0.0.1"
-        configValues:
-          targetProbeType: default-kube-znn-traffic@*
 
       GDeploymentInfo:
         type: KubowGaugeT
