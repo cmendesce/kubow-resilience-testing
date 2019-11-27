@@ -60,7 +60,7 @@ data:
       }
       action {
         if (highMode) {
-          M.rollOut(M.kubeZnnD, "znn", "cmendes/znn:text");
+          M.rollOut(M.kubeZnnD, "znn", "cmendes/znn:low");
         }
         if (lowMode) {
           M.rollOut(M.kubeZnnD, "znn", "cmendes/znn:text");
