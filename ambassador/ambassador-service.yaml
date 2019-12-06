@@ -88,3 +88,5 @@ spec:
       restartPolicy: Always
       securityContext:
         runAsUser: 8888
+      nodeSelector:
+        kops.k8s.io/instancegroup: "ingress"
