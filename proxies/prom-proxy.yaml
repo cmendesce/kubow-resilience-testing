@@ -34,6 +34,8 @@ spec:
         - name: prom-proxy-config
           mountPath: /etc/envoy.yaml
           subPath: envoy.yaml
+      nodeSelector:
+        kops.k8s.io/instancegroup: "monitoring"
 ---
 apiVersion: v1
 kind: Service
