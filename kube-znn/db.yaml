@@ -64,4 +64,4 @@ spec:
         ports:
         - containerPort: 3306
       nodeSelector:
-        kops.k8s.io/instancegroup: "db"
+        localhost.k8s.io/layer: "db"

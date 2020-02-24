@@ -10,13 +10,8 @@ spec:
       port: 8080
       targetPort: http
       protocol: TCP
-    - name: http-metrics
-      port: 9180
-      targetPort: metrics
-      protocol: TCP
   selector:
     app: kube-znn
-  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -87,4 +82,4 @@ spec:
         - name: metrics
           containerPort: 9180
       nodeSelector:
-        kops.k8s.io/instancegroup: "web"
+        localhost.k8s.io/layer: "web"
