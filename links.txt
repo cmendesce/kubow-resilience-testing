@@ -1,0 +1,13 @@
+https://medium.com/expedia-group-tech/request-load-distribution-in-kubernetes-and-aws-e139a3fec4ba
+
+https://kubernetes.io/blog/2018/07/09/ipvs-based-in-cluster-load-balancing-deep-dive/
+
+https://aws.amazon.com/pt/elasticloadbalancing/features/
+
+https://stackoverflow.com/questions/11020027/dns-caching-in-linux
+
+https://gitter.im/locustio/locust/archives/2015/09/09
+
+https://blog.getambassador.io/load-balancing-strategies-in-kubernetes-l4-round-robin-l7-round-robin-ring-hash-and-more-6a5b81595d6c
+
+https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis
