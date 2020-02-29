@@ -5,25 +5,22 @@ metadata:
   name: metrics-server
   namespace: kube-system
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: metrics-server
   namespace: kube-system
   labels:
-    app: metrics-server
-    version: v1
+    k8s-app: metrics-server
 spec:
   selector:
     matchLabels:
-      app: metrics-server
-      version: v1
+      k8s-app: metrics-server
   template:
     metadata:
       name: metrics-server
       labels:
-        app: metrics-server
-        version: v1
+        k8s-app: metrics-server
     spec:
       serviceAccountName: metrics-server
       volumes:
@@ -31,17 +28,23 @@ spec:
       - name: tmp-dir
         emptyDir: {}
       containers:
-      - command:
-        - /metrics-server
-        - --kubelet-insecure-tls
-        - --kubelet-preferred-address-types=InternalIP
-        name: metrics-server
-        image: k8s.gcr.io/metrics-server-amd64:v0.3.1
+      - name: metrics-server
+        image: k8s.gcr.io/metrics-server-amd64:v0.3.6
+        args:
+          - --cert-dir=/tmp
+          - --secure-port=4443
         ports:
-        - containerPort: 443
-        imagePullPolicy: Always
+        - name: main-port
+          containerPort: 4443
+          protocol: TCP
+        securityContext:
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+        imagePullPolicy: IfNotPresent
         volumeMounts:
         - name: tmp-dir
           mountPath: /tmp
       nodeSelector:
-        kops.k8s.io/instancegroup: "monitoring"
+        beta.kubernetes.io/os: linux
+        kubernetes.io/arch: "amd64"
