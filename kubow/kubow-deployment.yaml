@@ -100,4 +100,4 @@ spec:
           mountPath: /usr/share/kubow/targets/kube-znn/log4j.properties
           subPath: log4j.properties
       nodeSelector:
-        kops.k8s.io/instancegroup: "kubow"
+        localhost.k8s.io/layer: "kubow"

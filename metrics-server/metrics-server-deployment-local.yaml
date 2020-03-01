@@ -46,5 +46,6 @@ spec:
         - name: tmp-dir
           mountPath: /tmp
       nodeSelector:
+        localhost.k8s.io/layer: "monitoring"
         beta.kubernetes.io/os: linux
         kubernetes.io/arch: "amd64"

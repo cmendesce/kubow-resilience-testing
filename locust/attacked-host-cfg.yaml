@@ -3,4 +3,6 @@ kind: ConfigMap
 metadata:
   name: locust-cm
 data:
-  ATTACKED_HOST: http://ambassador
+  # ATTACKED_HOST: http://a3d1fc5eeb11e4c01b709f15fa78ce7c-1388452119.us-east-1.elb.amazonaws.com
+  # ATTACKED_HOST: https://cafe.example.com
+  ATTACKED_HOST: http://ingress-nginx.default.svc

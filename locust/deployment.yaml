@@ -5,15 +5,9 @@ metadata:
     app: locust-master
   name: locust-master
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: locust-master
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -21,7 +15,6 @@ spec:
     spec:
       containers:
       - image: cmendes/locust
-        imagePullPolicy: IfNotPresent
         name: locust-master
         env:
           - name: ATTACKED_HOST
@@ -41,17 +34,48 @@ spec:
           name: comm-plus-1
         - containerPort: 8089
           name: web-ui
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
       volumes:
       - name: locust-scripts
         configMap:
           name: scripts-cm
       nodeSelector:
-        kops.k8s.io/instancegroup: "testing"
+        localhost.k8s.io/layer: "testing"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: locust-slave
+  name: locust-slave
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: locust-slave
+  template:
+    metadata:
+      labels:
+        app: locust-slave
+    spec:
+      containers:
+      - image: cmendes/locust
+        name: locust-slave
+        env:
+          - name: ATTACKED_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: locust-cm
+                key: ATTACKED_HOST
+          - name: LOCUST_MODE
+            value: SLAVE
+          - name: LOCUST_MASTER
+            value: locust-master
+        volumeMounts:
+          - mountPath: /locust
+            name: locust-scripts
+      volumes:
+      - name: locust-scripts
+        configMap:
+          name: scripts-cm
+      nodeSelector:
+        localhost.k8s.io/layer: "testing"  

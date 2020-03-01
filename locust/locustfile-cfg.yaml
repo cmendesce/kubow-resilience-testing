@@ -7,7 +7,7 @@ data:
     from locust import HttpLocust, TaskSet
 
     def get_news(l):
-        l.client.get("/news.php")
+        l.client.get("/news.php", verify=False)
 
     class UserBehavior(TaskSet):
         tasks = {get_news: 1}
