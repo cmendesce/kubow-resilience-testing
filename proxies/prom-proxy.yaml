@@ -35,7 +35,7 @@ spec:
           mountPath: /etc/envoy.yaml
           subPath: envoy.yaml
       nodeSelector:
-        kops.k8s.io/instancegroup: "monitoring"
+        localhost.k8s.io/layer: "monitoring"
 ---
 apiVersion: v1
 kind: Service
@@ -44,7 +44,6 @@ metadata:
   labels:
     app: prom-proxy
 spec:
-  type: LoadBalancer
   ports:
   - name: http
     port: 8082

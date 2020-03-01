@@ -6,11 +6,12 @@ metadata:
   name: monitoring
 spec:
   image: kope.io/k8s-1.14-debian-stretch-amd64-hvm-ebs-2019-09-26
-  machineType: t3.medium
+  machineType: c5.large
   maxSize: 1
   minSize: 1
   nodeLabels:
     kops.k8s.io/instancegroup: monitoring
+    localhost.k8s.io/layer: monitoring
   role: Node
   subnets:
   - us-east-1a

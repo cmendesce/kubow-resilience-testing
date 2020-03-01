@@ -40,4 +40,4 @@ spec:
                 path: prometheus.yml
                 mode: 0644
       nodeSelector:
-        kops.k8s.io/instancegroup: "monitoring"
+        localhost.k8s.io/layer: "monitoring"
