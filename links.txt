@@ -11,3 +11,5 @@ https://gitter.im/locustio/locust/archives/2015/09/09
 https://blog.getambassador.io/load-balancing-strategies-in-kubernetes-l4-round-robin-l7-round-robin-ring-hash-and-more-6a5b81595d6c
 
 https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis
+
+https://www.stackrox.com/post/2020/01/kubernetes-networking-demystified/
