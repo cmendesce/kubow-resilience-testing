@@ -13,3 +13,6 @@ https://blog.getambassador.io/load-balancing-strategies-in-kubernetes-l4-round-r
 https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis
 
 https://www.stackrox.com/post/2020/01/kubernetes-networking-demystified/
+
+
+https://danielfm.me/posts/painless-nginx-ingress.html
