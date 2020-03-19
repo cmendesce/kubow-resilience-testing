@@ -22,3 +22,7 @@ https://danielfm.me/posts/painless-nginx-ingress.html
 
 
 https://www.solo.io/blog/webinar-recap-envoy-proxy-and-modern-api-gateway-architecture/?utm_campaign=Webinar%3A%2002.26.2020%20-%20Gloo%20Architecture&utm_content=120115340&utm_medium=social&utm_source=twitter&hss_channel=tw-846446677460504576
+
+https://www.loggly.com/blog/benchmarking-5-popular-load-balancers-nginx-haproxy-envoy-traefik-and-alb/
+
+https://www.thoughtworks.com/insights/blog/building-service-mesh-envoy-0
