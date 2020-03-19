@@ -11,4 +11,5 @@ kops create secret --name cmendes.k8s.local sshpublickey admin -i ~/.ssh/id_rsa.
 kops create -f ig-kube-znn.yaml
 kops create -f ig-monitoring.yaml
 kops create -f ig-testing.yaml
+kops create -f ig-ingress.yaml
 kops update cluster cmendes.k8s.local --yes
