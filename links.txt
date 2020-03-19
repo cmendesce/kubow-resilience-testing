@@ -15,3 +15,10 @@ https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis
 https://blog.sebastian-daschner.com/entries/zero-downtime-updates-kubernetes
 
 https://freecontent.manning.com/handling-client-requests-properly-with-kubernetes/
+https://www.stackrox.com/post/2020/01/kubernetes-networking-demystified/
+
+
+https://danielfm.me/posts/painless-nginx-ingress.html
+
+
+https://www.solo.io/blog/webinar-recap-envoy-proxy-and-modern-api-gateway-architecture/?utm_campaign=Webinar%3A%2002.26.2020%20-%20Gloo%20Architecture&utm_content=120115340&utm_medium=social&utm_source=twitter&hss_channel=tw-846446677460504576
