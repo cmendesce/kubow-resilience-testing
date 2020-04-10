@@ -12,8 +12,16 @@ spec:
     metadata:
       labels:
         app: locust-master
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9646"
     spec:
       containers:
+      - image: containersol/locust_exporter
+        name: locust-exporter
+        ports:
+        - containerPort: 9646
+          name: exporter
       - image: cmendes/locust
         name: locust-master
         env:
@@ -48,7 +56,7 @@ metadata:
     app: locust-slave
   name: locust-slave
 spec:
-  replicas: 6
+  replicas: 1
   selector:
     matchLabels:
       app: locust-slave

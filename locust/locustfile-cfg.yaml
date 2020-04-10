@@ -4,13 +4,37 @@ metadata:
   name: scripts-cm
 data:
   locustfile.py: |
-    from locust import HttpLocust, TaskSet
+    import os
+    import random
+    from locust import TaskSet, task, HttpLocust
+    from html.parser import HTMLParser
+    from html.entities import name2codepoint
+    
+    class Parser(HTMLParser):
+      def __init__(self):
+          self.urls = list()
+          super().__init__()
 
-    def get_news(l):
-        l.client.get("/news.php", verify=False)
+      def handle_starttag(self, tag, attrs):
+          if tag == 'img':
+              for attr, val in attrs:
+                  if attr == 'src':
+                      self.urls.append(val)
+                      break
 
-    class UserBehavior(TaskSet):
-        tasks = {get_news: 1}
-
-    class WebsiteUser(HttpLocust):
-        task_set = UserBehavior
+      def get_urls(self):
+          return self.urls
+    
+    class DetailsNewsPage(TaskSet):
+      @task
+      def read_news(self):
+          response = self.client.get('/news.php', verify=False, name='news.php')
+          if response.ok:
+              parser = Parser()
+              parser.feed(response.text)
+              urls = parser.get_urls()
+              [self.client.get(u, name='news.php') for u in urls]
+          
+    class TestUser(HttpLocust):
+      task_set = DetailsNewsPage
+    
