@@ -20,7 +20,6 @@ metadata:
   labels:
     app: kube-znn
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: kube-znn
@@ -35,51 +34,53 @@ spec:
         app: kube-znn
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/port: "9180"
+        prometheus.io/port: "9145"
     spec:
-      serviceAccountName: kubeznn
+      volumes:
+        - name: shared-files
+          emptyDir: {}
+        - name: nginx-config-volume
+          configMap:
+            name: nginx-config
+        - name: nginx-exporter-volume
+          configMap:
+            name: nginx-exporter
       containers:
-      - name: znn
-        image: cmendes/znn:high
-        imagePullPolicy: IfNotPresent
-        env:
-        - name: DB_HOST
-          value: "kube-znn-db"
-        - name: DB_PORT
-          value: "3306"
-        - name: DB_NAME
-          value: "znn_data"
-        - name: DB_USER
-          value: "root"
-        - name: SLEEP_TIME
-          value: "0"
-        - name: DB_PASS
-          valueFrom:
-            secretKeyRef:
-              name: mysql-pass
-              key: password
-        readinessProbe:
-          exec:
-            command:
-            - curl
-            - -f
-            - http://localhost/news.php
-          initialDelaySeconds: 1
-          periodSeconds: 2
-          failureThreshold: 5
-        livenessProbe:
-          exec:
-            command:
-            - curl
-            - -f
-            - http://localhost/liveness.php
-          initialDelaySeconds: 1
-          periodSeconds: 1
-          failureThreshold: 5
-        ports:
-        - name: http
-          containerPort: 80
-        - name: metrics
-          containerPort: 9180
+        - image: cmendes/znn:high
+          name: znn
+          imagePullPolicy: Always
+          env:
+          - name: DB_HOST
+            value: "kube-znn-db"
+          - name: DB_NAME
+            value: "znn"
+          - name: DB_PASS
+            value: "znn_pass"
+          volumeMounts:
+            - name: shared-files
+              mountPath: /var/www/html
+          ports:
+          - name: fpm
+            containerPort: 9000
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "cp -r /www/. /var/www/html"]
+        - image: openresty/openresty:alpine-fat
+          name: nginx
+          volumeMounts:
+            - name: shared-files
+              mountPath: /var/www/html
+            - name: nginx-config-volume
+              mountPath: /usr/local/openresty/nginx/conf/nginx.conf
+              subPath: nginx.conf
+            - name: nginx-exporter-volume
+              mountPath: /etc/nginx/nginx-lua-prometheus/prometheus.lua
+              subPath: prometheus.lua
+          ports:
+          - name: http
+            containerPort: 80
+          - name: exporter
+            containerPort: 9145
       nodeSelector:
         localhost.k8s.io/layer: "web"
