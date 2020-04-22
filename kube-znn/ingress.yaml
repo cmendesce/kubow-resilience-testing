@@ -9,7 +9,11 @@ spec:
   - host: "ingress-nginx.default.svc"
     http:
       paths:
-      - path: /
+      - path: /news.php
+        backend:
+          serviceName: kube-znn
+          servicePort: 8080
+      - path: /images/
         backend:
           serviceName: kube-znn
           servicePort: 8080

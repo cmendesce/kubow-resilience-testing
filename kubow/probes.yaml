@@ -17,7 +17,7 @@ data:
           args.0: "default"
           args.1: "kube-znn"
           args.2: "latency"
-          args.3: "histogram_quantile(0.95, rate(nginx_ingress_controller_request_duration_seconds_bucket{status="200"}[30s]))"
+          args.3: "histogram_quantile(0.95, sum by (le)(rate(nginx_http_request_duration_seconds_bucket{host='_'}[30s])))"
       
 
       DeploymentPropertiesProbe:
