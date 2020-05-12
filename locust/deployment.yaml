@@ -56,7 +56,7 @@ metadata:
     app: locust-slave
   name: locust-slave
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: locust-slave

@@ -28,12 +28,7 @@ data:
     class DetailsNewsPage(TaskSet):
       @task
       def read_news(self):
-          response = self.client.get('/news.php', verify=False, name='news.php')
-          if response.ok:
-              parser = Parser()
-              parser.feed(response.text)
-              urls = parser.get_urls()
-              [self.client.get(u, name='news.php') for u in urls]
+          response = self.client.get('/news.php', verify=False)
           
     class TestUser(HttpLocust):
       task_set = DetailsNewsPage

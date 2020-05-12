@@ -4,7 +4,7 @@ metadata:
   name: nginx-config
 data:
   nginx.conf: |
-    worker_processes  1;
+    worker_processes 2;
     events {
       worker_connections  1024;
     }
