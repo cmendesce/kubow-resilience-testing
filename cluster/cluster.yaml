@@ -28,11 +28,26 @@ spec:
   iam:
     allowContainerRegistry: true
     legacy: false
+  kubeAPIServer:
+    admissionControl:
+    - NamespaceLifecycle
+    - LimitRanger
+    - ServiceAccount
+    - PersistentVolumeLabel
+    - DefaultStorageClass
+    - DefaultTolerationSeconds
+    - MutatingAdmissionWebhook
+    - ValidatingAdmissionWebhook
+    - ResourceQuota
+    - NodeRestriction
+    - Priority
+  # kubeProxy:
+  #   proxyMode: ipvs
   kubelet:
     anonymousAuth: false
   kubernetesApiAccess:
   - 0.0.0.0/0
-  kubernetesVersion: 1.15.10
+  kubernetesVersion: 1.16.9
   masterPublicName: api.cmendes.k8s.local
   networkCIDR: 172.20.0.0/16
   networking:
