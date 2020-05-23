@@ -23,11 +23,6 @@ spec:
   selector:
     matchLabels:
       app: kube-znn
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
-    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -46,9 +41,8 @@ spec:
           configMap:
             name: nginx-exporter
       containers:
-        - image: cmendes/znn:high
+        - image: cmendes/znn:00k
           name: znn
-          imagePullPolicy: Always
           env:
           - name: DB_HOST
             value: "kube-znn-db"
@@ -74,6 +68,12 @@ spec:
             - name: nginx-config-volume
               mountPath: /usr/local/openresty/nginx/conf/nginx.conf
               subPath: nginx.conf
+            - name: nginx-exporter-volume
+              mountPath: /etc/nginx/nginx-lua-prometheus/prometheus_resty_counter.lua
+              subPath: prometheus_resty_counter.lua
+            - name: nginx-exporter-volume
+              mountPath: /etc/nginx/nginx-lua-prometheus/prometheus_keys.lua
+              subPath: prometheus_keys.lua
             - name: nginx-exporter-volume
               mountPath: /etc/nginx/nginx-lua-prometheus/prometheus.lua
               subPath: prometheus.lua
