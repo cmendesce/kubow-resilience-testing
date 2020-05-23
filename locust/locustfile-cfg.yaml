@@ -28,7 +28,7 @@ data:
     class DetailsNewsPage(TaskSet):
       @task
       def read_news(self):
-          response = self.client.get('/news.php', verify=False)
+          response = self.client.get('/news', verify=False)
           
     class TestUser(HttpLocust):
       task_set = DetailsNewsPage

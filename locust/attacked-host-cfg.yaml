@@ -4,5 +4,6 @@ metadata:
   name: locust-cm
 data:
   # ATTACKED_HOST: http://kube-znn:8080
-  # ATTACKED_HOST: http://ingress-nginx.default.svc
-  ATTACKED_HOST: http://nginx-ingress.default.svc
+  # ATTACKED_HOST: http://nginx-ingress.default.svc
+  ATTACKED_HOST: http://pynn.default.svc:8080
+  

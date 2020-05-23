@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pynn
+  labels:
+    app: pynn
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+      protocol: TCP
+  selector:
+    app: pynn
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pynn
+  labels:
+    app: pynn
+spec:
+  selector:
+    matchLabels:
+      app: pynn
+  nodeSelector:
+    localhost.k8s.io/layer: "testing"
+  template:
+    metadata:
+      labels:
+        app: pynn
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9200"
+    spec:
+      containers:
+        - image: cmendes/znn-python:400k
+          name: znn
+          env:
+          - name: DB_HOST
+            value: "kube-znn-db"
+          - name: DB_NAME
+            value: "znn"
+          - name: DB_PASS
+            value: "znn_pass"
+          ports:
+          - name: http
+            containerPort: 5000
+      nodeSelector:
+        localhost.k8s.io/layer: "web"
