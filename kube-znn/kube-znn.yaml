@@ -41,7 +41,7 @@ spec:
           configMap:
             name: nginx-exporter
       containers:
-        - image: cmendes/znn:00k
+        - image: cmendes/znn:400k
           name: znn
           env:
           - name: DB_HOST
