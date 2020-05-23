@@ -7,8 +7,8 @@ metadata:
 spec:
   image: kope.io/k8s-1.14-debian-stretch-amd64-hvm-ebs-2019-09-26
   machineType: c5.xlarge
-  maxSize: 2
-  minSize: 2
+  maxSize: 1
+  minSize: 1
   nodeLabels:
     kops.k8s.io/instancegroup: testing
     localhost.k8s.io/layer: testing
