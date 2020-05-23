@@ -23,8 +23,6 @@ spec:
   selector:
     matchLabels:
       app: pynn
-  nodeSelector:
-    localhost.k8s.io/layer: "testing"
   template:
     metadata:
       labels:
