@@ -15,14 +15,25 @@ https://en.wikipedia.org/wiki/Failure_mode_and_effects_analysis
 https://blog.sebastian-daschner.com/entries/zero-downtime-updates-kubernetes
 
 https://freecontent.manning.com/handling-client-requests-properly-with-kubernetes/
+
 https://www.stackrox.com/post/2020/01/kubernetes-networking-demystified/
 
-
 https://danielfm.me/posts/painless-nginx-ingress.html
-
 
 https://www.solo.io/blog/webinar-recap-envoy-proxy-and-modern-api-gateway-architecture/?utm_campaign=Webinar%3A%2002.26.2020%20-%20Gloo%20Architecture&utm_content=120115340&utm_medium=social&utm_source=twitter&hss_channel=tw-846446677460504576
 
 https://www.loggly.com/blog/benchmarking-5-popular-load-balancers-nginx-haproxy-envoy-traefik-and-alb/
 
 https://www.thoughtworks.com/insights/blog/building-service-mesh-envoy-0
+
+http://arthurchiao.art/blog/cracking-k8s-node-proxy/
+
+https://github.com/kubernetes/kubernetes/blob/master/pkg/proxy/ipvs/README.md
+
+https://pkg.go.dev/k8s.io/kops/pkg/apis/kops?tab=doc#ClusterSpec
+
+https://github.com/nginxinc/kubernetes-ingress/blob/master/docs/nginx-ingress-controllers.md
+
+https://www.nginx.com/blog/testing-performance-nginx-ingress-controller-kubernetes/#Technical-Details-of-Testing
+
+https://www.getambassador.io/resources/envoyproxy-performance-on-k8s/
